@@ -18,4 +18,4 @@ jobs:
       with:
         repo-token: ${{ secrets.token }}
         configuration-path: ${{ inputs.config-path }}
-    - run: echo ${{target}}
+    - run: echo ${{ inputs }}
