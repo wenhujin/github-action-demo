@@ -22,6 +22,6 @@ jobs:
     with:
       target: ${{ matrix.target }}
       config-path: .github/labeler.yml
-      ref: ${{ github.ref }}
+      ref: ${GITHUB_REF}
     secrets: inherit
 
