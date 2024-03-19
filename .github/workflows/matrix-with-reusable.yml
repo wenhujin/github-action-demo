@@ -8,8 +8,6 @@ jobs:
       fail-fast: false
       matrix:
         environment: ["production", "staging", "development"]
-
-  test-job:
     runs-on: ubuntu-latest
     steps:
       - uses: ./.github/workflows/common-task.yml
