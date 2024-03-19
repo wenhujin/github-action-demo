@@ -11,3 +11,8 @@ jobs:
       fail-fast: false
       matrix:
         environment: ["production", "staging", "development"]
+    steps:
+      - name: Echo environment in matrix
+        run: echo "Running common task in ${{ inputs.environment }} environment"
+      - run: ls
+      - run: echo ${{ github}}

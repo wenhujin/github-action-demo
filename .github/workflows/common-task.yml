@@ -16,3 +16,8 @@ jobs:
 
       - name: Echo environment
         run: echo "Running common task in ${{ inputs.environment }} environment"
+      - name: touch file
+        run: touch file.txt
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
