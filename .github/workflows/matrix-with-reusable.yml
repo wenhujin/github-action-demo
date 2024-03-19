@@ -11,10 +11,20 @@ jobs:
       fail-fast: false
       matrix:
         environment: ["production", "staging", "development"]
-  test-job:
+  # run after reusable workflow
+  test-job2:
     runs-on: ubuntu-latest
     steps:
       - name: Echo environment in matrix
         run: echo "Running common task in ${{ inputs.environment }} environment"
       - run: ls
       - run: echo ${{ github}}
+  test-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Echo environment in matrix
+        run: echo "Running common task in ${{ inputs.environment }} environment"
+      # list files in the repository
+      - run: find . -type f
+      - run: echo ${{ github.event_name }}
