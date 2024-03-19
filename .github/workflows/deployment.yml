@@ -6,6 +6,9 @@ on:
       config-path:
         required: true
         type: string
+      target:
+        required: true
+        type: string
     secrets:
       token:
         required: true
