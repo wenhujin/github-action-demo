@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         target: [dev, stage, prod]
-    uses: wenhujin/github-action-demo/.github/workflows/deployment.yml@${{ github.ref }}
+    uses: wenhujin/github-action-demo/.github/workflows/deployment.yml@${GITHUB_REF}
     with:
       target: ${{ matrix.target }}
       config-path: .github/labeler.yml
