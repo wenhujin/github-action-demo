@@ -4,12 +4,9 @@ on: [push]
 
 jobs:
   example-matrix-job:
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/common-task.yml@main
+    with:
+      environment: ${{ matrix.environment }}
     strategy:
       matrix:
-        environment: ["production", "staging", "development"]
-    steps:
-      - name: Call Reusable Workflow
-        uses: ./.github/workflows/common-task.yml@main
-        with:
-          environment: ${{ matrix.environment }}
+        environment: ['production', 'staging', 'development']
