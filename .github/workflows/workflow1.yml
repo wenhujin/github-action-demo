@@ -9,6 +9,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Run some other steps
+      run: find .
     - name: Install CLI Tool
       uses: ./.github/actions/install-cli
 
