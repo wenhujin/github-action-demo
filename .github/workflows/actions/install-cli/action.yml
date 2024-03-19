@@ -1,0 +1,7 @@
+name: 'Install CLI Tool'
+description: 'Installs a specific CLI tool'
+runs:
+  using: 'composite'
+  steps:
+  - run: touch cli && chmod +x cli
+    shell: bash

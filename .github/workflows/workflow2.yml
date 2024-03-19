@@ -1,0 +1,16 @@
+name: Another Workflow 2
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Install CLI Tool
+      uses: .github/actions/install-cli
+
+    - name: Run some other steps
+      run: ls
