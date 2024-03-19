@@ -1,0 +1,21 @@
+name: CI Workflow
+
+on: [push, pull_request]
+
+jobs:
+  setup-job:
+    uses: ./.github/workflows/install-cli.yml
+
+  test-job:
+    needs: setup-job
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: list
+      run: |
+        ls
+    - name: Run tests using the installed CLI
+      run: |
+        cli test
