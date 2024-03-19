@@ -20,7 +20,6 @@ jobs:
         target: [dev, stage, prod]
     uses: wenhujin/github-action-demo/.github/workflows/deployment.yml@wenhujin-patch-1
     with:
-      target: ${{ matrix.target }}
       config-path: .github/labeler.yml
     secrets: inherit
 
