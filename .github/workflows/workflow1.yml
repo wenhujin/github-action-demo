@@ -12,7 +12,7 @@ jobs:
     - name: Run some other steps
       run: find .
     - name: Install CLI Tool
-      uses: ./.github/actions/install-cli
+      uses: ./.github/workflows/actions/install-cli
 
     - name: Run some other steps
       run: ls
