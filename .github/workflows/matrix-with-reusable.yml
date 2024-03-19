@@ -4,17 +4,21 @@ on: [push]
 
 jobs:
   call-reusable-workflow:
+    uses: ./.github/workflows/common-task.yml
+    with:
+      environment: ${{ matrix.environment }}
     strategy:
       fail-fast: false
       matrix:
         environment: ["production", "staging", "development"]
+  # run after reusable workflow
+  test-job2:
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/common-task.yml
-        with:
-          environment: ${{ matrix.environment }}
       - name: Echo environment in matrix
         run: echo "Running common task in ${{ inputs.environment }} environment"
-      # list files in the repository
-      - run: find . -type f
-      - run: echo ${{ github.event_name }}
+      - name: display file list
+        run: ls -l
+        shell: bash
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
