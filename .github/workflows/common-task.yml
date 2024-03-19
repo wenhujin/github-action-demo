@@ -1,0 +1,18 @@
+name: Common Task Workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  run-common-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Echo environment
+        run: echo "Running common task in ${{ inputs.environment }} environment"
