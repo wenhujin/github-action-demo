@@ -12,6 +12,7 @@ jobs:
       matrix:
         environment: ["production", "staging", "development"]
   test-job:
+    runs-on: ubuntu-latest
     steps:
       - name: Echo environment in matrix
         run: echo "Running common task in ${{ inputs.environment }} environment"
