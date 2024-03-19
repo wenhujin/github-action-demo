@@ -22,3 +22,6 @@ jobs:
     uses: wenhujin/github-action-demo/.github/workflows/deployment.yml@main
     with:
       target: ${{ matrix.target }}
+      config-path: .github/labeler.yml
+    secrets: inherit
+
