@@ -3,10 +3,11 @@ name: Matrix with Reusable Workflow
 on: [push]
 
 jobs:
-  example-matrix-job:
-    uses: ./.github/workflows/common-task.yml@main
+  call-reusable-workflow:
+    uses: ./.github/workflows/common-task.yml
     with:
       environment: ${{ matrix.environment }}
     strategy:
+      fail-fast: false
       matrix:
-        environment: ['production', 'staging', 'development']
+        environment: ["production", "staging", "development"]
