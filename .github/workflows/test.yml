@@ -23,7 +23,7 @@ on:
       namespace:
         required: true
         type: string
-        description: "target namespace - valid value: verda-vcsmt | verda-a,verda-b,verda-c"
+        description: 'target namespace - valid value: verda-vcsmt | ["dev", "qa", "prod"]'
       cluster:
         type: string
         description: "target cluster name with single namespace - empty = all clusters in namespace"
@@ -34,6 +34,9 @@ jobs:
   mysql-agent-version-upgrade:
     name: ${{ inputs.env }}-${{ inputs.namespace }}
     runs-on: [ self-hosted, "${{ inputs.env }}" ]
+    strategy:
+      matrix:
+        namespace: ${{ fromJSON(github.event.inputs.namespace)}}
     env:
       DEPLOYMENT_ENV: ${{ inputs.env }}
       MYSQL_AGENT_VERSION: ${{ inputs.mysql-agent-version }}
@@ -44,4 +47,4 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - run: echo hello
+      - run: echo ${{namespace}}
