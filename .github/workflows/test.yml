@@ -45,6 +45,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.generate-matrix.outputs.matrix)}}
+      matrix: ${{fromJson(needs.generate-namespaces.outputs.matrix)}}
     steps:
       - run: echo "Using namespace ${{ matrix }}"
