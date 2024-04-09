@@ -1,5 +1,5 @@
 name: mysql-agent version upgrade
-run-name: Deploy to ${{ inputs.env }} mysql-agent ${{mysql-agent-version}} server-agent ${{server-agent-version}} by @${{ github.actor }}
+run-name: Deploy to ${{ inputs.env }} mysql-agent ${{inputs.mysql-agent-version}} server-agent ${{inputs.server-agent-version}} by @${{ github.actor }}
 on:
   workflow_dispatch:
     inputs:
