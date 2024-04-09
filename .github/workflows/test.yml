@@ -31,13 +31,23 @@ on:
         type: string
         description: "ansible parallel execution. default: 5"
 jobs:
+  generate-namespaces:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          echo 'matrix='$(jq -nR '[range(100) | {namespace: ("namespace-" + "\(.)")} ]')' >> $GITHUB_ENV
+
   mysql-agent-version-upgrade:
     name: ${{ matrix.namespace }}
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 2
+      fail-fast: true
       matrix:
-        namespace: ${{ fromJSON(github.event.inputs.namespace)}}
+        namespace: ${{ fromJson(needs.generate-namespaces.outputs.matrix }}
     env:
       DEPLOYMENT_ENV: ${{ inputs.env }}
       MYSQL_AGENT_VERSION: ${{ inputs.mysql-agent-version }}
