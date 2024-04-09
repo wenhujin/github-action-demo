@@ -37,7 +37,7 @@ jobs:
     steps:
       - id: dataStep
         run: |
-          NAMESPACES=$(jq -nR '[range(100) | "namespace-\(.)"]' | jq -r @json)
+          NAMESPACES=$(jq -nR '[range(3000) | "namespace-\(.)"]' | jq -r @json)
           echo "myoutput=$(jq -cn --argjson namespaces "$NAMESPACES" '{namespaces: $namespaces}')" >> $GITHUB_OUTPUT
         shell: bash
   upgrade-agent:
@@ -46,6 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      max-parallel: 4
       matrix: ${{fromJson(needs.generate-namespaces.outputs.matrix)}}
     steps:
       - run: echo "Using namespace ${{ matrix.namespaces }}"
