@@ -1,0 +1,46 @@
+name: mysql-agent version upgrade
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: 'deployment env'
+        required: true
+        options:
+          - mysql-master-dev
+          - mysql-stage-dev
+          - mysql-stage-prod
+          - mysql-real-dev
+          - mysql-real-prod
+          - mysql-real-prod-sgp
+      mysql-agent-version:
+        type: string
+        description: "mysql-agent version (ex: v0.1.55) | empty = run only server-agent upgrade"
+      server-agent-version:
+        type: string
+        description: "server-agent version (ex: v0.0.30) | empty = run only mysql-agent upgrade"
+      namespace:
+        required: true
+        type: string
+        description: "target namespace - valid value: verda-vcsmt | verda-a,verda-b,verda-c"
+      cluster:
+        type: string
+        description: "target cluster name with single namespace - empty = all clusters in namespace"
+      forks:
+        type: string
+        description: "ansible parallel execution. default: 5"
+jobs:
+  mysql-agent-version-upgrade:
+    name: ${{ inputs.environment }}-${{ inputs.namespace }}
+    runs-on: [ self-hosted, "${{ inputs.env }}" ]
+    env:
+      DEPLOYMENT_ENV: ${{ inputs.env }}
+      MYSQL_AGENT_VERSION: ${{ inputs.mysql-agent-version }}
+      SERVER_AGENT_VERSION: ${{ inputs.server-agent-version }}
+      NAMESPACE: ${{ inputs.namespace }}
+      CLUSTER: ${{ inputs.cluster }}
+      FORKS: ${{ inputs.forks || 5 }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - run: echo hello
