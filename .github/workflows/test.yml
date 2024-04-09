@@ -37,7 +37,7 @@ jobs:
     steps:
       - id: set-matrix
         run: |
-          echo 'matrix='$(jq -nR '[range(100) | {namespace: ("namespace-" + "\(.)")} ]')' >> $GITHUB_ENV
+          echo "matrix=$(jq -nR '[range(100) | {namespace: ("namespace-" + "\(.)")} ]')" >> $GITHUB_ENV
   use-namespaces:
     needs: generate-namespaces
     runs-on: ubuntu-latest
