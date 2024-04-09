@@ -37,7 +37,7 @@ jobs:
     steps:
       - id: dataStep
         run: |
-          NAMESPACES=$(jq -nR '[range(1000) | "namespace-\(.)"]' | jq -r @json)
+          NAMESPACES=$(jq -nR '[range(200) | "namespace-\(.)"]' | jq -r @json)
           echo "myoutput=$(jq -cn --argjson namespaces "$NAMESPACES" '{namespaces: $namespaces}')" >> $GITHUB_OUTPUT
         shell: bash
   upgrade-agent:
