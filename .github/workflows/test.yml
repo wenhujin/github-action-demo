@@ -30,18 +30,16 @@ on:
         type: string
         description: "ansible parallel execution. default: 5"
 jobs:
-  generate-matrix:
+  generate-namespaces:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - id: set-matrix
         run: |
-          echo "::set-output name=matrix::$(jq -nR '[range(100) | "namespace-\(.)"]' | jq -r @json)"
-        shell: bash
-
+          echo 'matrix::'$(jq -nR '[range(100) | "namespace-\(.)"]' | jq -r @json) >> $GITHUB_OUTPUT
   use-matrix:
-    needs: generate-matrix
+    needs: generate-namespaces
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
