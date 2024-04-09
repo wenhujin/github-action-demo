@@ -32,8 +32,8 @@ on:
         description: "ansible parallel execution. default: 5"
 jobs:
   mysql-agent-version-upgrade:
-    name: ${{ inputs.env }}-${{ inputs.namespace }}
-    runs-on: [ self-hosted, "${{ inputs.env }}" ]
+    name: ${{ matrix.namespace }}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         namespace: ${{ fromJSON(github.event.inputs.namespace)}}
