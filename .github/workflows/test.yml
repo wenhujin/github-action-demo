@@ -1,4 +1,4 @@
-name: mysql-agent version upgrade
+name: mysql-agent version upgrade ${{ inputs.env }}-${{ inputs.namespace }}
 on:
   workflow_dispatch:
     inputs:
