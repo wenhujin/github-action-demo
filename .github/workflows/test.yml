@@ -33,11 +33,13 @@ jobs:
   generate-namespaces:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.dataStep.outputs.namespaces }}
     steps:
-      - id: set-matrix
+      - id: dataStep
         run: |
-          echo 'matrix::'$(jq -nR '[range(100) | "namespace-\(.)"]' | jq -r @json) >> $GITHUB_OUTPUT
+          NAMESPACES=$(jq -nR '[range(100) | "namespace-\(.)"]' | jq -r @json)
+          echo "namespaces=$NAMESPACES" >> $GITHUB_OUTPUT
+        shell: bash
   use-matrix:
     needs: generate-namespaces
     runs-on: ubuntu-latest
