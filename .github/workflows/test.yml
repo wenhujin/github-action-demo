@@ -21,7 +21,6 @@ on:
         type: string
         description: "server-agent version (ex: v0.0.30) | empty = run only mysql-agent upgrade"
       namespace:
-        required: true
         type: string
         description: 'target namespace - valid value: verda-vcsmt | ["dev", "qa", "prod"]'
       cluster:
